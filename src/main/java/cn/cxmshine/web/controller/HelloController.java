@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController   //这个注解能够代替@Controller + @ResponseBody
-@EnableAutoConfiguration    //自动配置,不需要再写大量的配置文件
+//@EnableAutoConfiguration    //自动配置,不需要再写大量的配置文件
 public class HelloController {
 
     @RequestMapping("hello/{name}")
