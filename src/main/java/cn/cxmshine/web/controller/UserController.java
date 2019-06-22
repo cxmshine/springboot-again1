@@ -4,6 +4,7 @@ import cn.cxmshine.model.User;
 import cn.cxmshine.service.IUserService;
 import cn.cxmshine.test1.service.UserServiceImpl;
 import cn.cxmshine.test2.service.CustomerServiceImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("user")
 public class UserController {
+
+    Logger logger = Logger.getLogger(UserController.class);
 
     @RequestMapping("info/{id}")
     public User userInfo(@PathVariable("id") Integer id){
@@ -34,15 +37,11 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService1;
 
-    @Autowired
-    private CustomerServiceImpl customerService;
-
     @RequestMapping("register")
-    public String register(String username,String password,String tel){
+    public String register(String username,String password){
+        logger.info("====="+"username:"+username+"password:"+password);
         //向test1表插入数据
         userService1.save(username,password);
-        //向test2表插入数据
-        customerService.save(username,tel);
         return "success";
     }
 
@@ -51,4 +50,9 @@ public class UserController {
 //    public User findByUsername(String username){
 //        return userService.findByUsername(username);
 //    }
+
+    @RequestMapping("/login")
+    public String login(String username,String password){
+        return "user/list";
+    }
 }
