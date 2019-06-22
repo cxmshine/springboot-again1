@@ -1,22 +1,22 @@
 package cn.cxmshine.web.controller;
 
 import cn.cxmshine.model.User;
-import cn.cxmshine.service.IUserService;
-import cn.cxmshine.test1.service.UserServiceImpl;
-import cn.cxmshine.test2.service.CustomerServiceImpl;
+import cn.cxmshine.service.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
+@Controller
 @RequestMapping("user")
 public class UserController {
 
-    Logger logger = Logger.getLogger(UserController.class);
+    //Logger logger = Logger.getLogger(UserController.class);
 
     @RequestMapping("info/{id}")
+    @ResponseBody
     public User userInfo(@PathVariable("id") Integer id){
         User user = new User("chenxuming","123456");
         user.setId(id);
@@ -35,18 +35,20 @@ public class UserController {
 
     //多数据源的练习,往两张表中插入数据
     @Autowired
-    private UserServiceImpl userService1;
+    private UserServiceImpl userService;
 
     @RequestMapping("register")
+    @ResponseBody
     public String register(String username,String password){
-        logger.info("====="+"username:"+username+"password:"+password);
+        //logger.info("====="+"username:"+username+"password:"+password);
         //向test1表插入数据
-        userService1.save(username,password);
+        userService.register(username,password);
         return "success";
     }
 
 
 //    @RequestMapping("findUser")
+//    @ResponseBody
 //    public User findByUsername(String username){
 //        return userService.findByUsername(username);
 //    }
