@@ -27,6 +27,7 @@
         </tr>
     </#list>
 
-</table>
+</table></br>
+${student.id} | ${student.username} | ${student.gender}
 </body>
 </html>
